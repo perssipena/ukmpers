@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>UKM Pers SIPENA - Universitas Ibnu Sina</title>
+  <meta name="description" content="Landing page UKM Pers SIPENA - Universitas Ibnu Sina" />
+  <style>
+    /* =========== ROOT / THEME =========== */
+    :root{
+      --primary: #2A4C2E;               /* warna utama hijau */
+      --primary-2: #4f7a56;
+      --bg: #071029;
+      --card: rgba(20,30,22,0.55);
+      --glass: rgba(255,255,255,0.04);
+      --muted: #b8c9b8;
+      --neon: rgba(47,166,101,0.98);
+      --accent-grad: linear-gradient(90deg,var(--primary),var(--primary-2));
+      --container-w: 1100px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;scroll-behavior:smooth}
+    body{
+      background: var(--bg);
+      color: #e6f0e9;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding-bottom:60px;
+      position:relative;
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    /* =========== BACKGROUND (CSS only, jurnalisme feel) =========== */
+    body::before{
+      content:"";
+      position:fixed; inset:0; z-index:0;
+      /* subtle radial glows */
+      background:
+        radial-gradient(600px 300px at 10% 12%, rgba(47,166,101,0.06), transparent 12%),
+        radial-gradient(700px 300px at 92% 88%, rgba(47,166,101,0.03), transparent 12%),
+        linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));
+      pointer-events:none;
+    }
+    /* newspaper-like vertical columns / texture (animated ticker) */
+    body::after{
+      content:"";
+      position:fixed; inset:0; z-index:0;
+      background-image:
+        repeating-linear-gradient( to right,
+           rgba(255,255,255,0.01) 0 1px,
+           transparent 1px 120px
+        ),
+        linear-gradient(90deg, rgba(0,0,0,0.02), rgba(0,0,0,0.04));
+      opacity:0.9;
+      mix-blend-mode:overlay;
+      animation: ticker 12s linear infinite;
+      pointer-events:none;
+      will-change:background-position;
+    }
+    @keyframes ticker {
+      from{ background-position: 0 0, 0 0; }
+      to  { background-position: -800px 0, 0 0; }
+    }
+
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--container-w);margin:36px auto;padding:24px;position:relative;z-index:2}
+
+    /* =========== Header =========== */
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{
+      width:64px;height:64px;border-radius:12px;
+      background:linear-gradient(135deg,var(--primary)33,var(--primary-2)33);
+      display:flex;align-items:center;justify-content:center;
+      -webkit-backdrop-filter: blur(6px);backdrop-filter: blur(6px);
+      box-shadow:0 8px 30px rgba(14,20,15,0.6);
+      border:1px solid rgba(255,255,255,0.02);
+    }
+    .logo svg{filter:drop-shadow(0 8px 18px rgba(46,100,60,0.18))}
+    h1{font-size:20px;line-height:1}
+    .tag{font-size:12px;color:var(--muted)}
+    nav{display:flex;gap:12px;align-items:center}
+    .btn{padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,#0b0f0b66,#0b0f0b44);border:1px solid rgba(255,255,255,0.03);cursor:pointer;color:inherit;font-size:14px}
+    .btn.primary{background:var(--accent-grad);color:#f6fff7;font-weight:700;border:none;box-shadow:0 8px 30px rgba(46,100,60,0.12)}
+
+    /* =========== HERO =========== */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:24px;align-items:start;margin-top:28px}
+    .hero-left{display:flex;flex-direction:column;gap:14px}
+    .kicker{display:inline-block;padding:8px 12px;border-radius:999px;background:linear-gradient(90deg,#071a0f,#071029);font-weight:600;color:var(--neon);letter-spacing:0.6px;font-size:13px}
+    .lead{font-size:22px;color:#e9f4ea}
+    .lead small{display:block;color:var(--muted);font-size:13px;margin-top:6px}
+    .typing-info{margin-top:6px;color:var(--muted);font-size:13px;min-height:22px}
+    .cta-row{margin-top:10px;display:flex;gap:12px}
+
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border-radius:14px;padding:16px;-webkit-backdrop-filter: blur(6px);backdrop-filter: blur(6px);border:1px solid rgba(255,255,255,0.03)}
+
+    /* =========== CARDS =========== */
+    .card-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:14px}
+    .card{padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(10,20,14,0.6), rgba(8,12,10,0.5));border:1px solid var(--glass)}
+    .card h3{font-size:16px;margin-bottom:8px}
+    .card p{font-size:14px;color:var(--muted)}
+
+    /* =========== DIVISIONS =========== */
+    .divisions-section{margin-top:28px}
+    .divisions{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+    .division{padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border:1px solid rgba(255,255,255,0.02)}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.02);font-size:12px;color:var(--muted)}
+    .division-p{margin-top:8px;color:var(--muted);font-size:13px}
+
+    /* =========== PROGRAMS =========== */
+    .programs{margin-top:22px}
+    .program{display:flex;gap:12px;align-items:center;padding:12px;border-radius:12px;background:linear-gradient(90deg, rgba(42,76,46,0.06), rgba(79,122,86,0.04));border:1px solid rgba(42,76,46,0.06);margin-top:10px}
+    .prog-media{width:160px;height:100px;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.03);background:#0a0f0a}
+    .prog-media img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.95)}
+    .program-desc{ color: var(--muted); font-size: 13px; }
+
+    /* =========== GALLERY =========== */
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
+    .gallery img{width:100%;height:160px;object-fit:cover;border-radius:10px;border:1px solid rgba(255,255,255,0.03);display:block}
+    .gallery-note{ color: var(--muted); font-size:13px; margin-top:8px; }
+
+    /* =========== CONTACT CARD (IG + WA) =========== */
+    .contact-card{
+      position:fixed; right:20px; bottom:20px; z-index:9999;
+      min-width:260px; max-width:320px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px; padding:12px; box-shadow:0 14px 60px rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.04);
+      display:none; flex-direction:column; gap:8px;
+    }
+    .contact-card.open{display:flex}
+    .contact-row{display:flex;gap:8px;align-items:center}
+    .contact-btn{flex:1;padding:8px;border-radius:8px;background:var(--primary);color:#fff;text-align:center;font-weight:600;border:none}
+    .contact-secondary{background:rgba(255,255,255,0.04);color:var(--muted)}
+
+    /* =========== ANIMATIONS & ICON EFFECTS =========== */
+    .pulse{animation:pulse 3s ease-in-out infinite}
+    @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.02)}100%{transform:scale(1)}}
+
+    .typing{border-right:2px solid rgba(255,255,255,0.12);white-space:nowrap;overflow:hidden}
+
+    .icon{width:44px;height:44px;border-radius:10px;background:linear-gradient(180deg,#07130f,#071029);display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.03)}
+    .icon svg{transform-origin:center;animation:float 6s ease-in-out infinite}
+    @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
+
+    /* camera flash impl - pseudo element on .camera */
+    .camera{position:relative;overflow:visible}
+    .camera::after{
+      content:""; position:absolute; inset: -8px -8px auto auto; width:60px; height:60px; border-radius:50%;
+      background: radial-gradient(circle at 50% 40%, rgba(255,255,255,0.9), rgba(255,255,255,0.2) 20%, rgba(255,255,255,0) 30%);
+      transform:scale(.2); opacity:0; pointer-events:none;
+      transition:transform .35s ease, opacity .35s ease;
+    }
+    .camera.flash::after{ transform:scale(1.2); opacity:0.9; transition:transform .22s linear, opacity .22s linear; }
+
+    /* pen draw SVG reveal: initial hidden stroke */
+    .draw-path{ stroke: #cfead0; stroke-width:1.6; fill:none; stroke-dasharray: 400; stroke-dashoffset: 400; transition: stroke-dashoffset 1s ease-out; }
+    .draw-path.revealed{ stroke-dashoffset: 0; transition: stroke-dashoffset 1s ease-out; }
+
+    /* reveal utility (used by IntersectionObserver) */
+    .reveal{ opacity:0; transform:translateY(20px); transition: all .6s cubic-bezier(.2,.9,.2,1); }
+    .reveal.show{ opacity:1; transform:translateY(0); }
+
+    /* responsive */
+    @media(max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .divisions{grid-template-columns:repeat(2,1fr)}
+      .gallery{grid-template-columns:repeat(2,1fr)}
+      .card-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:520px){
+      .divisions{grid-template-columns:1fr}
+      .gallery{grid-template-columns:1fr}
+      nav{display:none}
+      .logo{width:56px;height:56px}
+      .container{padding:12px}
+    }
+  </style>
+</head>
+<body>
+  <!-- Add the audio player here -->
+  <audio id="bgMusic" loop>
+    <source src="1.mp3" type="audio/mp3">
+    Browser Anda tidak mendukung audio.
+  </audio>
+  <script>
+    document.addEventListener('click', function playAudioOnce() {
+      document.getElementById('bgMusic').play();
+      document.removeEventListener('click', playAudioOnce);
+    });
+  </script>
+
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo pulse" aria-hidden="true">
+          <!-- pen + mic minimal -->
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3 21h18" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M7 7l4 4 8-8" stroke="#e6f7ea" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <h1>UKM Pers <strong>SIPENA</strong></h1>
+          <div class="tag">Universitas Ibnu Sina • Unit Kegiatan Mahasiswa</div>
+        </div>
+      </div>
+
+      <nav>
+        <a class="btn" href="#about">Tentang</a>
+        <a class="btn" href="#programs">Program</a>
+        <a class="btn" href="#gallery">Galeri</a>
+        <a class="btn primary" id="daftarBtn" href="#" target="_blank" rel="noopener">Daftar Sekarang</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section id="hero" class="hero reveal" aria-label="Hero">
+        <div class="hero-left">
+          <span class="kicker">UKM Pers Kampus</span>
+
+          <div class="lead">Gabung SIPENA — Belajar jurnalistik, fotografi, dan produksi konten.
+            <small>Wadah kreatif mahasiswa Universitas Ibnu Sina untuk berkarya dan meliput.</small>
+          </div>
+
+          <div class="typing-info"><span id="typing" class="typing" aria-live="polite"></span></div>
+
+          <div class="cta-row">
+            <a class="btn primary" id="heroDaftar" href="#" target="_blank" rel="noopener">Daftar Sekarang</a>
+            <button class="btn" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Pelajari Lebih</button>
+            <button class="btn" id="open-contact-btn">Kontak Admin</button>
+          </div>
+
+          <div style="margin-top:10px;" class="icon-row">
+            <div class="icon camera" id="cameraIcon" title="Berita" aria-hidden="true">
+              <!-- camera svg -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="3" y="5" width="18" height="14" rx="2" stroke="#cfead0" stroke-width="1.2"/>
+                <circle cx="12" cy="12" r="3" stroke="#cfead0" stroke-width="1.2"/>
+              </svg>
+            </div>
+            <div class="icon" title="Foto" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 19V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12" stroke="#9fb0a3" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="icon" title="Opini" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 20v-8" stroke="#7aa77a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 12h10" stroke="#7aa77a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-card reveal" aria-labelledby="about">
+          <div class="card">
+            <h3 id="about">Apa itu UKM Pers SIPENA?</h3>
+            <p>UKM SIPENA adalah wadah pengembangan potensi mahasiswa dibidang jurnalistik, literasi media, serta penyampai aspirasi mahasiswa civitas akademika. Organisasi ini berkomitmen untuk menjaga independensi, menjunjung tinggi etika jurnalistik, serta menjadi ruang edukatif, kreatif, dan kritis bagi seluruh anggotanya.</p>
+          </div>
+
+          <div class="card-grid" aria-hidden="false">
+            <div class="card">
+              <h3>Visi</h3>
+              <!-- pen-writing svg beside text -->
+              <div style="display:flex;gap:10px;align-items:center">
+                <svg width="72" height="48" viewBox="0 0 120 48" aria-hidden="true">
+                  <path id="penStroke" class="draw-path" d="M8 30 Q40 6 80 30" stroke-linecap="round"/>
+                </svg>
+                <div>
+                  <div style="font-weight:700">Menjadi pusat jurnalistik kampus</div>
+                  <div style="font-size:13px;color:var(--muted)">Profesional, kritis, dan inovatif pada tahun 2028.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Misi</h3>
+              <p class="card-text">Mengasah kemampuan menulis, investigasi, fotografi, dan produksi konten digital; membangun komunitas pembelajar yang etis dan kreatif.</p>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- DIVISIONS -->
+      <section class="divisions-section reveal" aria-label="Divisions">
+        <h2 class="divisions-title">Perkenalan Divisi</h2>
+        <p class="division-desc">Divisi inti yang bertanggung jawab membuat naskah berita, feature, dan opini.</p>
+        <div class="divisions" role="list">
+          <div class="division" role="listitem">
+            <h4>Redaksi</h4>
+            <div class="pill">Penulisan & Liputan</div>
+            <p class="division-p">Meliput acara, menulis berita, opini, dan melakukan editing naskah.</p>
+          </div>
+          <div class="division" role="listitem">
+            <h4>Editor</h4>
+            <div class="pill">Foto & Video</div>
+            <p class="division-p">Meliput acara, pengambilan gambar, serta editing foto & video untuk publikasi.</p>
+          </div>
+          <div class="division" role="listitem">
+            <h4>Pro-Art</h4>
+            <div class="pill">Layout & Website</div>
+            <p class="division-p">Mendesain layout majalah, poster, serta pengelolaan website dan sosial media.</p>
+          </div>
+          <div class="division" role="listitem">
+            <h4>Media Sosial & Promosi</h4>
+            <div class="pill">Layout & Website</div>
+            <p class="division-p">Mendesain layout majalah, poster, serta pengelolaan website dan sosial media.</p>
+            </div>
+        </div>
+      </section>
+
+      <!-- PROGRAMS -->
+      <section id="programs" class="programs reveal" aria-label="Programs">
+        <h2 class="programs-title">Program SIPENA<h2>
+
+        <div class="program" aria-label="Program 1">
+          <div class="prog-text">
+            <h5>1. Workshop Fotografi dan Jurnalistik</h5>
+            <p class="program-desc">Pelatihan Internal tentang fotografi, vidiografi, reportase, penulisan, dan desain grafis.</p>
+          </div>
+        </div>
+
+        <div class="program" aria-label="Program 2">
+          <div class="prog-text">
+            <h5>2. Sudut literasi</h5>
+            <p class="program-desc">Program Pengembangan ruang baca kreatif dilingkungan kampus universitas ibnu sina. menghadirkan pojok baca berupa rak buku, berdasarkan jenis buku, majalah dinding dan konten digital.</p>
+          </div>
+        </div>
+
+        <div class="program" aria-label="Program 3">
+          <div class="prog-text">
+            <h5>3. Mading Kampus</h5>
+            <p class="program-desc">Membuat mading berisi artikel, opini, puisi, ilustrasi, dan informasi penting mahasiswa.</p>
+          </div>
+        </div>
+
+        <div class="program" aria-label="Program 4">
+          <div class="prog-text">
+            <h5>4. Artikel Berita Kampus</h5>
+            <p class="program-desc">Membuat dan mempublikasikan artikel terkait kegiatan kampus, isu, dan informasi kampus dimedia online/media sosial.</p>
+          </div>
+        </div>
+
+        <p class="program-note" style="color:var(--muted);font-size:13px;margin-top:8px">* Dan masih banyak lagi agenda dan program SIPENA.</p>
+      </section>
+
+      <!-- GALLERY -->
+      <section id="gallery" class="reveal" aria-label="Gallery">
+        <h2>Galeri Kegiatan</h2>
+        <p class="gallery-note">Berikut beberapa foto dokumentasi kegiatan kami.</p>
+        <div class="gallery" aria-hidden="false">
+          <img loading="lazy" src="3.jpg" alt="Kegiatan 1">
+          <img loading="lazy" src="4.jpg" alt="Kegiatan 2">
+          <img loading="lazy" src="5.jpg" alt="Kegiatan 3">
+        </div>
+      </section>
+
+      <!-- JOIN / CTA -->
+      <section style="margin-top:18px" class="hero-card reveal" aria-label="Join">
+        <h2>Gabung dan Daftar</h2>
+        <p style="color:var(--muted);font-size:13px">Kalau kamu mau gabung, isi formulir pendaftaran berikut. Kami terbuka untuk semua mahasiswa Universitas Ibnu Sina yang punya minat jurnalistik.</p>
+        <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+          <!-- ganti link form di bawah dengan Link Google Form pendaftaran asli -->
+          <a id="formLink" class="btn primary" href="https://docs.google.com/forms/d/e/1FAIpQLSfExampleFormLink/viewform" target="_blank" rel="noopener">Isi Form Pendaftaran</a>
+          <button class="btn" id="open-contact-btn-2">Kontak Admin</button>
+        </div>
+      </section>
+    </main>
+
+    <footer style="margin-top:28px;color:var(--muted);text-align:center">
+      <div style="font-weight:600;color:#eaf7ea">UKM Pers SIPENA — Universitas Ibnu Sina</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:6px">Hak cipta © SIPENA • Semua kegiatan bersifat edukatif dan non-komersial</div>
+    </footer>
+  </div>
+
+  <!-- Contact card (IG + WA) -->
+  <div id="contactCard" class="contact-card" role="dialog" aria-hidden="true" aria-label="Kontak Admin SIPENA">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div style="font-weight:700">Kontak Admin SIPENA</div>
+      <button id="closeContact" style="background:none;border:none;color:var(--muted);cursor:pointer">✕</button>
+    </div>
+    <div style="font-size:13px;color:var(--muted)">Pilih kanal komunikasi:</div>
+    <div class="contact-row">
+      <a class="contact-btn" id="igLink" href="https://instagram.com/sipena_uis" target="_blank" rel="noopener">
+        <!-- ig svg small -->
+        <span style="display:inline-block;vertical-align:middle;margin-right:8px">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="#fff" stroke-opacity="0.25"/><circle cx="12" cy="12" r="3" stroke="#fff" stroke-opacity="0.25"/></svg>
+        </span> Instagram
+      </a>
+      <a class="contact-btn contact-secondary" id="waLink" href="https://wa.me/6285925542431" target="_blank" rel="noopener">
+        <!-- wa svg -->
+        <span style="display:inline-block;vertical-align:middle;margin-right:8px">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 12a9 9 0 1 0-2.47 6.08L21 21l-2.92-0.77A8.99 8.99 0 0 0 21 12z" stroke="#fff" stroke-opacity="0.25"/></svg>
+        </span> WhatsApp
+      </a>
+    </div>
+    <div style="font-size:12px;color=var(--muted);margin-top:8px">Catatan: Silahkan dihubungi jika ingin bertanya lebih lanjut yah :).</div>
+  </div>
+
+  <script>
+    // ===== helper: safe query =====
+    const $ = (s) => document.querySelector(s);
+
+    // ===== typing animation (hero) =====
+    (function(){
+      const typingText = [
+        'Tulis berita yang bermakna...',
+        'Meliput dengan integritas...',
+        'Berkreasi melalui foto dan data...'
+      ];
+      let tIdx = 0, cIdx = 0, forward = true;
+      const el = document.getElementById('typing');
+      if(!el) return;
+      function tick(){
+        const full = typingText[tIdx];
+        if(forward){
+          cIdx++;
+          if(cIdx >= full.length){ forward = false; setTimeout(tick, 900); return; }
+        } else {
+          cIdx--;
+          if(cIdx <= 0){ forward = true; tIdx = (tIdx + 1) % typingText.length; setTimeout(tick, 300); return; }
+        }
+        el.textContent = full.slice(0, cIdx);
+        setTimeout(tick, forward ? 80 : 40);
+      }
+      tick();
+    })();
+
+    // ===== IntersectionObserver for reveal & triggering animations =====
+    (function(){
+      const observer = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            entry.target.classList.add('show');
+            // special: if pen svg inside, reveal its path
+            const penPath = entry.target.querySelector('.draw-path');
+            if(penPath) {
+              // small timeout to sync visually
+              setTimeout(()=>penPath.classList.add('revealed'), 120);
+            }
+            // special: if camera icon in this section, flash it
+            const cam = entry.target.querySelector('.camera');
+            if(cam){
+              cam.classList.add('flash');
+              // remove flash quick after
+              setTimeout(()=>cam.classList.remove('flash'), 320);
+            }
+            // we can unobserve once shown
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.18 });
+
+      document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+    })();
+
+    // ===== Camera icon periodic subtle flash when hero visible (extra) =====
+    (function(){
+      const cam = document.getElementById('cameraIcon');
+      if(!cam) return;
+      // small initial delay then periodic gentle flash
+      setTimeout(()=>{ cam.classList.add('flash'); setTimeout(()=>cam.classList.remove('flash'),280); }, 900);
+      setInterval(()=>{ cam.classList.add('flash'); setTimeout(()=>cam.classList.remove('flash'),260); }, 7000);
+    })();
+
+    // ===== CONTACT CARD (IG + WA) controls =====
+    (function(){
+      const contactCard = document.getElementById('contactCard');
+      const btns = document.querySelectorAll('#open-contact-btn, #open-contact-btn-2');
+      const close = document.getElementById('closeContact');
+
+      function openCard(){
+        contactCard.classList.add('open');
+        contactCard.setAttribute('aria-hidden','false');
+      }
+      function closeCard(){
+        contactCard.classList.remove('open');
+        contactCard.setAttribute('aria-hidden','true');
+      }
+
+      btns.forEach(b=>b && b.addEventListener('click', openCard));
+      if(close) close.addEventListener('click', closeCard);
+
+      // close clicking outside
+      document.addEventListener('click', (e)=>{
+        if(contactCard.classList.contains('open') && !contactCard.contains(e.target) && ![...btns].some(b=>b && b.contains(e.target))){
+          closeCard();
+        }
+      });
+
+      // keyboard escape
+      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeCard(); });
+    })();
+
+    // ===== set form links safely (change to your real form if needed) =====
+    (function(){
+      const formLink = 'https://forms.gle/iDaaxK9nqQFdjxHc7'; // <-- ganti ke form asli
+      const elForm = document.getElementById('formLink');
+      const btnDaftar = document.getElementById('daftarBtn');
+      const heroDaftar = document.getElementById('heroDaftar');
+      if(elForm) elForm.href = formLink;
+      if(btnDaftar) btnDaftar.href = formLink;
+      if(heroDaftar) heroDaftar.href = formLink;
+    })();
+
+    // ===== keyboard shortcut (press J to open form) =====
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'j' || e.key === 'J'){
+        const btn = document.getElementById('daftarBtn') || document.getElementById('formLink');
+        if(btn) window.open(btn.href || btn.getAttribute('href') || '#', '_blank');
+      }
+    });
+
+    // ===== accessibility: focus trap minimal idea - ensure contact card focused when open (simple) =====
+    (function(){
+      const contactCard = document.getElementById('contactCard');
+      const firstFocusable = () => contactCard && contactCard.querySelector('a, button');
+      document.addEventListener('click', (e)=>{
+        if(contactCard.classList.contains('open')){
+          const f = firstFocusable();
+          if(f) f.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
